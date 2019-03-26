@@ -1,0 +1,12 @@
+package sandeep.fullapplication.UserAddressService;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserAddressController {
+	
+	
+	
+	
+
+}

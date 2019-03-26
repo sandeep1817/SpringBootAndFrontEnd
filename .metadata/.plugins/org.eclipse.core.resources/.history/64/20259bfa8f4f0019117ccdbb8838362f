@@ -1,0 +1,22 @@
+package sandeep.fullapplication.UserAddressService;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserAddressController {
+	
+	@GetMapping("/address")
+	public String getUserAddress(){
+		UserAddress userAddress = new UserAddress();
+		String add = userAddress.returnTheAddressOfUser("Sandeep");
+		return add;
+		
+	}
+	
+	
+	
+	
+
+}
