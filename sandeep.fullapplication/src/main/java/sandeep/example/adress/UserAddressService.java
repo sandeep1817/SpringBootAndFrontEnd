@@ -9,7 +9,7 @@ public class UserAddressService {
 	public String returnTheAddressOfUser(String userName){
 		
 		String address = "";
-
+		
 		if(userName.equalsIgnoreCase("Sandeep")){
 			address = "Sandeep is from Kadapa";
 		}
@@ -22,5 +22,8 @@ public class UserAddressService {
 		return address;
 		
 	}
-
+	public void addTheNewMemberWithAddress(){
+		System.out.println("sandeep");
+		
+	}
 }
