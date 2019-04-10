@@ -1,13 +1,16 @@
 package sandeep.example.address;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserAddressService {
+	String idOfTheUser;
+	String timeStamp;
+	
+	public static Map<String,String> userAddress = new HashMap<String, String>();
 	
 	//public UserAddressService usersWithAddress;
 	
@@ -16,51 +19,38 @@ public class UserAddressService {
 		
 	}*/
 	
-	private List<Address> addresses = new ArrayList<Address>();
-	private List<String> users = new ArrayList<String>();
+	//private List<Address> addresses = new ArrayList<Address>();
+//	private List<String> users = new ArrayList<String>();
 	
-	public boolean add(Address address) {
-		addresses.add(address);
-		return true;
+	public Address add(Address address) {
+		if(address.getIdOfTheUser()==null){
+			address.setIdOfTheUser(generateIdForTheCustomer());
+		}
+		if(address.getTimeStamp()==null){
+			address.setTimeStamp(getTimeStamp());
+		}
+		userAddress.put(address.getNameOfTheUser(),address.getAddressOfTheUser());
+		return address;
+		//return true;
 	}
 	
 	public String returnTheAddressOfUser(String userName){
-		
-		String address = "";
-		
-		if(userName.equalsIgnoreCase("Sandeep")){
-			address = "Sandeep is from Kadapa";
-		}
-		else if(userName.equalsIgnoreCase("Ganesh")){
-			address = "Ganesh is from Pune";
-		}
-		else if(userName.equalsIgnoreCase("Sharath")){
-			address = "Sharath is from Karnataka";
-		}
+		String address = userAddress.get(userName);
+		System.out.println(userName+" is from "+address);
 		return address;
-		
 	}
-	public void addTheNewUserWithAddress(){
-		
+	public String generateIdForTheCustomer(){
+		int id;
+		Random random = new Random();
+		id=random.nextInt(9000000)+1000000;
+		idOfTheUser = Integer.toString(id);
+		return idOfTheUser;
 	}
-	
-	/*public UserAddressService addTheNewMemberWithAddress(UserAddressService user, String address){
-		//usersWithAddress.put(user, address);
-		return new UserAddressService(user,address);
-	}*/
-	/*public boolean userExists(UserAddressService user2) {
-		boolean	flag  = false;
-		ArrayList<String> users = new ArrayList<String>();
-		for(String user:users){
-			if(user.equalsIgnoreCase(user2.toString())){
-				System.out.println("User Already exists");
-				flag = false;
-			}
-			else{
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}*/
+
+	public String getTimeStamp() {
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+		timeStamp = format.format(date);
+		return timeStamp;
+	}
 }
